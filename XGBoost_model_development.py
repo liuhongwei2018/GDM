@@ -42,17 +42,14 @@ print('----{}_{} TRAINING FINISHED----'.format('GDM','1'))
 best_params_file = pd.DataFrame.from_dict(best_params_)
 
 
-seed = 1
-clf = XGBClassifier(random_state=5361,scale_pos_weight=12.026280323450134,n_estimators=200,max_depth=2,
+
+clf = XGBClassifier(random_state=1,scale_pos_weight=12.026280323450134,n_estimators=200,max_depth=2,
                     min_child_weight=29,colsample_bytree=0.7,subsample=1,gamma=0,
                     reg_alpha=5,reg_lambda=5,learning_rate=0.1, n_jobs=-1).fit(X_train, y_train)
-pred_train = clf.predict_proba(X_train)
-pred_test = clf.predict_proba(X_test)
-score_train = roc_auc_score(y_train,pred_train[:,1])
-score_test = roc_auc_score(y_test, pred_test[:,1])
-#pd.concat([y_test,pred_test[:,1]])
-score = [seed,score_train,score_test]
-print([score])
+pred_train, pred_test = clf.predict_proba(X_train), clf.predict_proba(X_test)
+
+score_train, score_test = roc_auc_score(y_train,pred_train[:,1]), roc_auc_score(y_test, pred_test[:,1])
+print(score_train, score_test)
 
 clf.save_model("G:/Thesis/code/xgboost.model")
 
