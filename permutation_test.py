@@ -16,7 +16,9 @@ X_log ,y_log= data_all.drop(['OGTTgroup1','weight_gain','income','education','DB
 X_train,X_test,y_train,y_test = train_test_split(X,y,random_state = 1,test_size=0.3,stratify=y)
 X_train_log,X_test_log,y_train_log,y_test_log = train_test_split(X_log,y_log,random_state = 1,test_size=0.3,stratify=y_log)
 
-clf = XGBClassifier(random_state=1,n_jobs=-1).fit(X_train, y_train)
+clf = XGBClassifier(random_state=5361,scale_pos_weight=12.026280323450134,n_estimators=200,max_depth=2,
+                    min_child_weight=29,colsample_bytree=0.7,subsample=1,gamma=0,
+                    reg_alpha=5,reg_lambda=5,learning_rate=0.1, n_jobs=-1).fit(X_train, y_train)
 cv = StratifiedKFold(5)
 
 score, permutation_scores, pvalue = permutation_test_score(
