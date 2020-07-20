@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split, StratifiedKFold, permutati
 from xgboost.sklearn import XGBClassifier
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score
+from sklearn.linear_model import LogisticRegression
 
 data_all = pd.read_csv("G:/GDM/DATA/GDM.csv")
 
